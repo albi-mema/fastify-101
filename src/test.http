@@ -1,0 +1,22 @@
+GET http://localhost:3000/notes HTTP/1.1
+
+###
+
+GET http://localhost:3000/notes/2 HTTP/1.1
+
+###
+
+GET http://localhost:3000/notes/1 HTTP/1.1
+
+
+###
+
+GET http://localhost:3000/users/Jordon HTTP/1.1
+
+###
+
+GET http://localhost:3000/users/Dyana HTTP/1.1
+
+###
+
+GET http://localhost:3000/users HTTP/1.1
