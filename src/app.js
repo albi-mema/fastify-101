@@ -1,12 +1,13 @@
 const fastify = require("fastify");
+const fastifySwagger = require('@fastify/swagger');
 
-const { noteRoute } = require("./routes/noteRoutes");
-const { userRoute } = require("./routes/userRoutes");
 
-const build = (opts = {}) => {
+const { todosRoute } = require("./routes/todosRoute");
+
+const build = (opts = {},optsSwagger) => {
   const app = fastify(opts);
-  app.register(noteRoute);
-  app.register(userRoute);
+  app.register(fastifySwagger,optsSwagger);
+  app.register(todosRoute);
   return app;
 };
 

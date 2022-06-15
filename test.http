@@ -1,22 +1,23 @@
-GET http://localhost:3000/notes HTTP/1.1
+###Get all todos
+GET http://localhost:3000/ HTTP/1.1
+
+### Get a single todo with id of 1
+GET http://localhost:3000/1 HTTP/1.1
+
+### Get a single todo with id of 5
+GET http://localhost:3000/5 HTTP/1.1
+
+
+###Get all finished todos
+GET http://localhost:3000/finished HTTP/1.1
+
+###Get all unfinished todos
+GET http://localhost:3000/unfinished HTTP/1.1
 
 ###
+POST  http://localhost:3000/ HTTP/1.1
+Content-Type: application/json
 
-GET http://localhost:3000/notes/2 HTTP/1.1
-
-###
-
-GET http://localhost:3000/notes/1 HTTP/1.1
-
-
-###
-
-GET http://localhost:3000/users/Jordon HTTP/1.1
-
-###
-
-GET http://localhost:3000/users/Dyana HTTP/1.1
-
-###
-
-GET http://localhost:3000/users HTTP/1.1
+{
+    "content":"new todo item"
+}

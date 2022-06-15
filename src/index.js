@@ -1,6 +1,11 @@
+
 const { build } = require("./app");
-const app = build({ logger: true });
-const notes = require("./notes.json");
+
+
+const app = build({ logger: true },{exposeRoute: true,routePrefix : '/docs',swagger:{info:{title : "Fastify api"}}}) ;
+
+
+const todos = require("./todos.json");
 
 app.listen(3000, (err, address) => {
   if (err) {
