@@ -66,6 +66,23 @@ const deleteTODOopts ={
 
 
 
+const putTODOopts ={
+  schema:{
+    response:{
+      201:{
+        type: "object",
+        properties:{ 
+          message:{ type:"string"}
+        }
+      },
+    }
+  }
+}
+
+
+
+
+
 
 
 
@@ -104,7 +121,7 @@ const todosRoute = (fastify, options, done) => {
     reply.send(`Item ${id} was removed!`)
   })
 
-  fastify.put("/:id",(request, reply) => {
+  fastify.put("/:id",putTODOopts,(request, reply) => {
     const {id} = request.params
     const {status,content} = request.body
     const todo = todos.find((item) => item.id == id)
