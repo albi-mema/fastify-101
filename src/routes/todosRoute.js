@@ -1,20 +1,19 @@
 let todos = require("../todos.json");
 
-const itemSchema = {
-  type: "object",
-  properties: {
-    id: { type: "integer" },
-    status: { type: "boolean" },
-    content: { type: "string" }
-  },
-};
 
 const getTODOsOpts = {
   schema: {
     response: {
       200: {
         type: "array",
-        items: { itemSchema },
+        items:{
+          type: "object",
+          properties: {
+            id: { type: "integer" },
+            status: { type: "boolean" },
+            content: { type: "string" }
+          },
+        },
       },
     },
   },
@@ -23,7 +22,14 @@ const getTODOsOpts = {
 const getTODOOpts = {
   schema: {
     response: {
-      200: itemSchema 
+      200: {
+        type: "object",
+        properties: {
+          id: { type: "integer" },
+          status: { type: "boolean" },
+          content: { type: "string" }
+        },
+      },
     },
   },
 };
@@ -33,13 +39,33 @@ const postTODOopts ={
   schema:{
     response:{
       201:{
-        id: { type: "integer" },
-        status: { type: "boolean" },
-        content: { type: "string" }
+        type: "object",
+        properties: {
+          id: { type: "integer" },
+          status: { type: "boolean" },
+          content: { type: "string" }
+        },
       },
     }
   }
 }
+
+
+const deleteTODOopts ={
+  schema:{
+    response:{
+      201:{
+        type: "object",
+        properties:{ 
+          message:{ type:"string"}
+        }
+      },
+    }
+  }
+}
+
+
+
 
 
 
@@ -51,7 +77,7 @@ const todosRoute = (fastify, options, done) => {
 
   fastify.get("/:id", getTODOOpts, (request, reply) => {
     const { id } = request.params
-    const todo = todos.find((todo) => todo.id === id)
+    const todo = todos.find((todo) => todo.id == id)
     
     reply.send(todo)
   });
@@ -65,11 +91,27 @@ const todosRoute = (fastify, options, done) => {
     reply.send(todos.filter((todo) => todo.status == false));
   });
 
-  fastify.post("/",postTODOopts,(request,response) => {
+  fastify.post("/",postTODOopts,(request,reply) => {
     const {id,status,content} = request.body
     const item = {id:todos.length + 1,"status":false,content}
     todos.push(item)
     reply.code(201).send(item)
+  })
+
+  fastify.delete("/:id",deleteTODOopts,(request,reply) => {
+    const {id} = request.params
+    todos = todos.filter((todo) => todo.id != id )
+    reply.send(`Item ${id} was removed!`)
+  })
+
+  fastify.put("/:id",(request, reply) => {
+    const {id} = request.params
+    const {status,content} = request.body
+    const todo = todos.find((item) => item.id == id)
+    todo.status = status
+    todo.content = content
+
+    reply.send(todo)
   })
 
   done();
