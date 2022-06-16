@@ -1,4 +1,4 @@
-###Get all todos.
+###Get all todos. 
 GET http://localhost:3000/v2 HTTP/1.1
 
 ### Get a single todo with id of 1.

@@ -1,5 +1,15 @@
+const {
+  putTODOopts,
+  deleteTODOopts,
+  postTODOopts,
+  getTODOsOpts,
+  getTODOOpts,
+} = require("./../../schemas/schema");
+
+
 const todosDbRoute = async (fastify, options, done) => {
-  fastify.post("/", async (request, reply) => {
+  
+  fastify.post("/",postTODOopts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { status, content } = request.body;
@@ -15,7 +25,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/", async (request, reply) => {
+  fastify.get("/",getTODOsOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { rows } = await fastify.pg.query("SELECT * FROM todos");
@@ -27,7 +37,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/:id", async (request, reply) => {
+  fastify.get("/:id",getTODOOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { id } = request.params;
@@ -43,7 +53,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/finished", async (request, reply) => {
+  fastify.get("/finished",getTODOsOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { rows } = await fastify.pg.query(
@@ -57,7 +67,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/unfinished", async (request, reply) => {
+  fastify.get("/unfinished",getTODOsOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { rows } = await fastify.pg.query(
@@ -71,7 +81,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.delete("/:id", async (request, reply) => {
+  fastify.delete("/:id",deleteTODOopts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { id } = request.params;
@@ -87,7 +97,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.put("/:id", async (request, reply) => {
+  fastify.put("/:id",putTODOopts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { id } = request.params;
