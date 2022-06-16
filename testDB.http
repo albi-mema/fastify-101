@@ -1,0 +1,41 @@
+###Get all todos.
+GET http://localhost:3000/v2 HTTP/1.1
+
+### Get a single todo with id of 1.
+GET http://localhost:3000/v2/1 HTTP/1.1
+
+### Get a single todo with id of 6.
+GET http://localhost:3000/v2/6 HTTP/1.1
+
+
+###Get all finished todos.
+GET http://localhost:3000/v2/finished HTTP/1.1
+
+###Get all unfinished todos.
+GET http://localhost:3000/v2/unfinished HTTP/1.1
+
+### Add a new item.
+POST  http://localhost:3000/v2/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "status":"false",
+    "content":"new todo item"
+}
+
+###Delete an item.
+DELETE  http://localhost:3000/v2/8 HTTP/1.1
+
+###Update an Item.
+PUT http://localhost:3000/v2/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "status":true,
+    "content":"do something else"
+}
+
+
+
+
+
