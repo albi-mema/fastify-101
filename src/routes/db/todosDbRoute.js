@@ -76,10 +76,10 @@ const todosDbRoute = async (fastify, options, done) => {
       const client = await fastify.pg.connect();
       const { id } = request.params;
       const { rows } = await fastify.pg.query(
-        "DELETE FROM todos WHERE id = $1 RETURNING *",
+        "DELETE FROM todos WHERE id = $1",
         [id]
       );
-      reply.code(201).send(rows[0]);
+      reply.send(`The element with id ${id} was removed.`);
     } catch (err) {
       reply.send(err);
     } finally {
