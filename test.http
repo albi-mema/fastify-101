@@ -9,10 +9,10 @@ GET http://localhost:3000/v1/5 HTTP/1.1
 
 
 ###Get all finished todos.
-GET http://localhost:3000/v1/finished HTTP/1.1
+GET http://localhost:3000/v1/done HTTP/1.1
 
 ###Get all unfinished todos.
-GET http://localhost:3000/v1/unfinished HTTP/1.1
+GET http://localhost:3000/v1/not_done HTTP/1.1
 
 ### Add a new item.
 POST  http://localhost:3000/v1/ HTTP/1.1
