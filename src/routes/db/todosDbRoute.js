@@ -53,7 +53,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/finished",getTODOsOpts, async (request, reply) => {
+  fastify.get("/done",getTODOsOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { rows } = await fastify.pg.query(
@@ -67,7 +67,7 @@ const todosDbRoute = async (fastify, options, done) => {
     }
   });
 
-  fastify.get("/unfinished",getTODOsOpts, async (request, reply) => {
+  fastify.get("/not_done",getTODOsOpts, async (request, reply) => {
     try {
       const client = await fastify.pg.connect();
       const { rows } = await fastify.pg.query(
